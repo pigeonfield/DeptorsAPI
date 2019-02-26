@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Numerics;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DluznicyAPI.DAL.DAO
 {
@@ -14,13 +15,15 @@ namespace DluznicyAPI.DAL.DAO
         public int PersonID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public MailAddress Email { get; set; }
+        public string Email { get; set; }
         public int PhoneNumber { get; set; }
-        public Address Address { get; set; }
+
+        public virtual Address Address { get; set; }
+
         public bool IsEmployed { get; set; }
-        public Company Company { get; set; }
-        
-        public RulesFilter rules { get; set; }
+
+        public virtual Company Company { get; set; }
+            
 
         public int MoneyToLend { get; set; }
         public bool WantToLend
@@ -40,12 +43,10 @@ namespace DluznicyAPI.DAL.DAO
             }
         }
 
-        //public int MoneyToLend { get; set; }
-        //public bool WantToLend { get; set; }
-
-
-        //public int MoneyToBorrow { get; set; }
-        //public bool WantToBorrow { get; set; }
+        public int WaitingTime { get; set; }
+        public bool LendOnlyToEmployed { get; set; }
+        public bool RequiresAddress { get; set; }
+        public int MaxAmountOfMoney { get; set; }
 
     }
 }
