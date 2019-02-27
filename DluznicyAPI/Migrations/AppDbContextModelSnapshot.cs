@@ -15,7 +15,7 @@ namespace DluznicyAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -101,18 +101,20 @@ namespace DluznicyAPI.Migrations
             modelBuilder.Entity("DluznicyAPI.DAL.DAO.Company", b =>
                 {
                     b.HasOne("DluznicyAPI.DAL.DAO.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                        .WithMany("Companies")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("DluznicyAPI.DAL.DAO.Person", b =>
                 {
                     b.HasOne("DluznicyAPI.DAL.DAO.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                        .WithMany("Persons")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DluznicyAPI.DAL.DAO.Company", "Company")
-                        .WithMany()
+                        .WithMany("Persons")
                         .HasForeignKey("CompanyId");
                 });
 #pragma warning restore 612, 618
