@@ -11,30 +11,23 @@ namespace DluznicyAPI.DTO.ViewModels
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public MailAddress Email { get; set; }
+        public string Email { get; set; }
         public int PhoneNumber { get; set; }
-        public Address Address { get; set; }
+
+        public bool AddressIsGiven { get; set; }        
         public bool IsEmployed { get; set; }
-        public Company Company { get; set; }
-
-        public RulesFilter rules { get; set; }
-
+        public bool CompanyIsGiven { get; set; }
+                
         public int MoneyToLend { get; set; }
-        public bool WantToLend
-        {
-            get
-            {
-                return (MoneyToLend > 0);
-            }
-        }
+        public bool WantToLend { get; set; }
 
-        public int MoneyNeeded { get; set; }
-        public bool NeedToBorrow
-        {
-            get
-            {
-                return (MoneyNeeded > 0);
-            }
-        }
+        public int MoneyToBorrow { get; set; }
+        public bool WantToBorrow { get; set; }
+
+        public int WaitingTime { get; set; }
+        public bool LendOnlyToEmployed { get; set; }
+        public bool RequiresAddress { get; set; }
+        public int MaxAmountOfMoney { get; set; }
+
     }
 }

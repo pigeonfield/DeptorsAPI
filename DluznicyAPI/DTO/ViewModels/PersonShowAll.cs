@@ -10,15 +10,13 @@ namespace DluznicyAPI.DTO.ViewModels
 {
     public class PersonShowAll
     {
-        [Key]
-        public int PersonID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public MailAddress Email { get; set; }
+        public string Email { get; set; }
         public int PhoneNumber { get; set; }
-        public Address Address { get; set; }
-        public bool IsEmployed { get; set; }
-        public Company Company { get; set; }
+
+        public bool WantToLend { get; set; }
+        public bool WantToBorrow { get; set; }
 
     }
 }

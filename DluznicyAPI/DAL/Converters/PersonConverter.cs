@@ -21,7 +21,23 @@ namespace DluznicyAPI.DAL.Converters
         {
             return new PersonShowSingle
             {
+                Name = person.Name,
+                Surname = person.Surname,
+                Email = person.Email,
+                PhoneNumber = person.PhoneNumber,
+                AddressIsGiven = (!(person.Address == null)),
+                IsEmployed = person.IsEmployed,
+                CompanyIsGiven = (!(person.Company == null)),
 
+                MoneyToLend = person.MoneyToLend,
+                WantToLend = (person.MoneyToLend > 0),
+                MoneyToBorrow = person.MoneyToBorrow,
+                WantToBorrow = (person.MoneyToBorrow > 0),
+
+                WaitingTime = person.WaitingTime,
+                LendOnlyToEmployed = person.LendOnlyToEmployed,
+                RequiresAddress = person.RequiresAddress,
+                MaxAmountOfMoney = person.MaxAmountOfMoney
             };
         }
 
@@ -29,10 +45,17 @@ namespace DluznicyAPI.DAL.Converters
         {
             return new PersonShowAll
             {
+                Name = person.Name,
+                Surname = person.Surname,
+                Email = person.Email,
+                PhoneNumber = person.PhoneNumber,
 
+                WantToLend = ((person.MoneyToLend)>0),
+                WantToBorrow = ((person.MoneyToBorrow)>0)
             };
         }
 
 
     }
 }
+
