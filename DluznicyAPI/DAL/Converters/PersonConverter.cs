@@ -13,7 +13,7 @@ namespace DluznicyAPI.DAL.Converters
         {
             return new Person
             {
-
+                
             };
         }
 
@@ -50,8 +50,8 @@ namespace DluznicyAPI.DAL.Converters
                 Email = person.Email,
                 PhoneNumber = person.PhoneNumber,
 
-                WantToLend = ((person.MoneyToLend)>0),
-                WantToBorrow = ((person.MoneyToBorrow)>0)
+                WantToLend = ((person.MoneyToLend) > 0),
+                WantToBorrow = ((person.MoneyToBorrow) > 0)
             };
         }
 

@@ -5,7 +5,7 @@ namespace DluznicyAPI.DAL.DAO
 {
     public class Address
     {
-        
+
         public int AddressId { get; set; }
         public string Street { get; set; }
         public int HouseNum { get; set; }
