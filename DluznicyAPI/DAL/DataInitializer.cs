@@ -11,16 +11,16 @@ namespace DluznicyAPI.DAL
     {
         public static void Seed(this AppDbContext context)
         {
-            if (!context.Persons.Any())
+            if (!context.Users.Any())
             {
-                context.Persons.AddRange
+                context.Users.AddRange
                     (
                         new Person()
                         {
                             Name = "John",
                             Surname = "Brown",
                             Email = "johnbrown@mail.com", 
-                            PhoneNumber = 123456789,
+                            PhoneNumber = "123456789",
                             Address = new Address(),
                             IsEmployed = false,
 
@@ -33,7 +33,7 @@ namespace DluznicyAPI.DAL
                             Name = "Anna",
                             Surname = "Smith",
                             Email = "annasmith@mail.com", 
-                            PhoneNumber = 123456790,
+                            PhoneNumber = "123456790",
                             Address = new Address(),
                             IsEmployed = true,
                             Company = new Company(),
@@ -52,7 +52,7 @@ namespace DluznicyAPI.DAL
                             Name = "John",
                             Surname = "Smith",
                             Email = "johnsmith@mail.com",
-                            PhoneNumber = 123456776,
+                            PhoneNumber = "123456776",
                             Address = new Address(),
                             IsEmployed = false,
 
@@ -65,7 +65,7 @@ namespace DluznicyAPI.DAL
                             Name = "Maria",
                             Surname = "Black",
                             Email = "mariablack@mail.com", 
-                            PhoneNumber = 123457462,
+                            PhoneNumber = "123457462",
                             Address = new Address(),
                             IsEmployed = false,
                             

@@ -6,18 +6,16 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Numerics;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace DluznicyAPI.DAL.DAO
 {
-    public class Person
+    public class Person: IdentityUser
     {
-
-        public int PersonID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Email { get; set; }
-        public int PhoneNumber { get; set; }
 
+        public int PersonalDetailsId { get; set; }
         public PersonalDetails Details { get; set; }
 
         public int? AddressId { get; set; }

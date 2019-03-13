@@ -7,9 +7,10 @@ namespace DluznicyAPI.DAL.DAO
 {
     public class PersonalDetails
     {
-        public string Details { get; set; }
-
-        public int PersonId { get; set; }
+        public int PersonalDetailsId { get; set; }
+        public string DarkSecrets { get; set; }
+        
+        public string PersonId { get; set; }
         public virtual Person Person { get; set; }
     }
 }

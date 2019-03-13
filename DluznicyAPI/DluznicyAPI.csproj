@@ -10,6 +10,8 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.1.3" />
     
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
 
 
     
@@ -21,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="BL\ExtensionMethods\" />
-    <Folder Include="DAL\Repositories\" />
   </ItemGroup>
 
 </Project>
