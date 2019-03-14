@@ -54,7 +54,6 @@ namespace DluznicyAPI.DAL.Repositories
 
             if (personToDelete != null)
             {
-
                 _appDbContext.Users.RemoveRange(personToDelete);
             }
 

@@ -59,7 +59,7 @@ namespace DluznicyAPI.Controllers
                 Person personConverted = person.ConvertPersonWhenCreate();
                 await _personRepository.AddPerson(personConverted,  person.Password);
 
-                return Ok(personConverted);
+                return Ok(personConverted.ConvertPersonToShowSingle());
             }
             else
             {

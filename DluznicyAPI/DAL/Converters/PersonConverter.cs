@@ -13,12 +13,12 @@ namespace DluznicyAPI.DAL.Converters
         {
             return new Person
             {
-                UserName = person.UserName,
+                UserName = person.Email,
                 Name = person.Name,
                 Surname = person.Surname,
                 Email = person.Email,
                 PhoneNumber = person.PhoneNumber,
-                Details = new PersonalDetails(),
+                Details = person.Details,
                 Address = person.Address,
                 IsEmployed = person.IsEmployed,
                 Company = person.Company,

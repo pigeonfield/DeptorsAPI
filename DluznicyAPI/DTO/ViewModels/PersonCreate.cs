@@ -9,9 +9,6 @@ namespace DluznicyAPI.DTO.ViewModels
 {
     public class PersonCreate
     {
-        [Required]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        public string UserName { get; set; }
         [MaxLength(20)]
         public string Name { get; set; }
         [Required]
@@ -23,7 +20,7 @@ namespace DluznicyAPI.DTO.ViewModels
         [Required]
         [Phone] //add regex later
         public string PhoneNumber { get; set; }
-        public PersonalDetails Details { get; set; }
+        public virtual PersonalDetails Details { get; set; }
         public virtual Address Address { get; set; }
         [Required]
         public bool IsEmployed { get; set; }
