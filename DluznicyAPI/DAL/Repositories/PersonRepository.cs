@@ -48,16 +48,27 @@ namespace DluznicyAPI.DAL.Repositories
             }
         }
 
-        public Task DeletePerson(string personId)
+        public  async Task DeletePerson(string personId)
         {
             Person personToDelete = _userManager.Users.FirstOrDefault(p => p.Id == personId);
 
-            if (personToDelete != null)
+            if (personToDelete == null)
             {
-                _appDbContext.Users.RemoveRange(personToDelete);
+                throw new ArgumentNullException(nameof(personToDelete));
             }
 
-            return _appDbContext.SaveChangesAsync();
+            if (personToDelete != null)
+            {
+                var identityResult = await _userManager.DeleteAsync(personToDelete);
+                if (!identityResult.Succeeded)
+                {
+                    if (identityResult.Errors.Any())
+                    {
+                        throw new InvalidOperationException(identityResult.Errors.First().Description);
+                    }
+                }
+            }
+            
         }
 
     }
