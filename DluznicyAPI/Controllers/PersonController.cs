@@ -7,6 +7,7 @@ using DluznicyAPI.DAL.Converters;
 using DluznicyAPI.DAL.DAO;
 using DluznicyAPI.DAL.Repositories;
 using DluznicyAPI.DTO.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,39 +26,36 @@ namespace DluznicyAPI.Controllers
             _userManager = userManager;
         }
 
-
-
-        [HttpGet("{personId?}")]
+        [Authorize]
+        [HttpGet("{personId}")]
         public async Task<IActionResult> ShowPerson(string personId)
         {
-            if (personId == null)
+            var person = await _personRepository.GetPerson(personId);
+            if (person == null)
             {
-                var persons = await _personRepository.GetAllPersons();
-                var personsConverted = persons.Select(p => p.ConvertPersonToShowAll()).ToList();
-                return Ok(personsConverted);
+                return NotFound();
             }
             else
             {
-                var person = await _personRepository.GetPerson(personId);
-                if (person == null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    return Ok(person.ConvertPersonToShowSingle());
-                }
+                return Ok(person.ConvertPersonToShowSingle());
             }
-
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ShowPersons()
+        {
+            var persons = await _personRepository.GetAllPersons();
+            var personsConverted = persons.Select(p => p.ConvertPersonToShowAll()).ToList();
+            return Ok(personsConverted);
+        }
+               
         [HttpPost("register")]
         public async Task<IActionResult> AddPerson([FromBody]PersonCreate person)
         {
             if (ModelState.IsValid)
             {
                 Person personConverted = person.ConvertPersonWhenCreate();
-                await _personRepository.AddPerson(personConverted,  person.Password);
+                await _personRepository.AddPerson(personConverted, person.Password);
 
                 return Ok(personConverted.ConvertPersonToShowSingle());
             }
@@ -67,6 +65,7 @@ namespace DluznicyAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{personId}")]
         public async Task<IActionResult> DeletePerson(string personId)
         {
@@ -80,7 +79,6 @@ namespace DluznicyAPI.Controllers
                 return Ok();
             }
         }
-
 
     }
 }

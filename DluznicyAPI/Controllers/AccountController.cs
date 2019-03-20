@@ -11,27 +11,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DluznicyAPI.Controllers
 {
-    [Route("api/persons")]
+    [Route("api/account")]
     public class AccountController : Controller
     {
         private readonly IPersonRepository _personRepository;
         private readonly UserManager<Person> _userManager;
         private readonly SignInManager<Person> _signinManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(IPersonRepository personRepository, SignInManager<Person> signinManager, UserManager<Person> userManager)
+        public AccountController(IPersonRepository personRepository, SignInManager<Person> signinManager, 
+            UserManager<Person> userManager, RoleManager<IdentityRole> roleManager)
         {
             _personRepository = personRepository;
             _userManager = userManager;
             _signinManager = signinManager;
+            _roleManager = roleManager;
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult Dupa()
-        {
-            return Ok("cycki");
-        }
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]PersonLogin person)
         {
@@ -54,15 +51,30 @@ namespace DluznicyAPI.Controllers
 
             return null;       
         }
-
+               
+        [Authorize]
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             await _signinManager.SignOutAsync();
             return Ok();
-
         }
 
+        [Authorize(Roles="Administrator")]
+        [HttpPost("setadmin/{personId}")]
+        private async Task<IdentityResult> SetRoleToAdmin(string personId)
+        {
+            Person person = await _personRepository.GetPerson(personId);            
+            return await _userManager.AddToRoleAsync(person, "Administrator");
+        }
+
+        [Authorize(Roles="Administrator")]
+        [HttpPost("setsuperuser/{personId}")]
+        public async Task<IdentityResult> SetRoleToSuperUser(string personId)
+        {
+            Person person = await _personRepository.GetPerson(personId);
+            return await _userManager.AddToRoleAsync(person, "SuperUser");
+        }
 
     }
 }

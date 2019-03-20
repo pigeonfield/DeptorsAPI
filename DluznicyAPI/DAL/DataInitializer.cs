@@ -1,4 +1,5 @@
 ﻿using DluznicyAPI.DAL.DAO;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -159,6 +160,34 @@ namespace DluznicyAPI.DAL
                 context.SaveChanges();
             }
         }
+
+        public static void SeedRoles(this RoleManager<IdentityRole> roleManager)
+        {
+            if (!roleManager.RoleExistsAsync
+                ("User").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "User";
+                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+            }
+
+            if (!roleManager.RoleExistsAsync
+                ("SuperUser").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "SuperUser";
+                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+            }
+
+            if (!roleManager.RoleExistsAsync
+                ("Administrator").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "Administrator";
+                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+            }
+        }
+
     }
 }
 

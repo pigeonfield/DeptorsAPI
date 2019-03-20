@@ -1,4 +1,5 @@
 ﻿using DluznicyAPI.DAL.DAO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,11 +25,13 @@ namespace DluznicyAPI.DAL.Repositories
             return _userManager.Users.AsNoTracking().ToListAsync();
         }
 
+        [Authorize] //user 
         public Task<Person> GetPerson(string personId)
         {
             return _userManager.Users.FirstOrDefaultAsync(p => p.Id == personId);
         }
 
+        [Authorize] //admin
         public async Task AddPerson(Person person, string pswd)
         {
             if (person == null)
@@ -48,6 +51,7 @@ namespace DluznicyAPI.DAL.Repositories
             }
         }
 
+        [Authorize]  //admin
         public  async Task DeletePerson(string personId)
         {
             Person personToDelete = _userManager.Users.FirstOrDefault(p => p.Id == personId);
