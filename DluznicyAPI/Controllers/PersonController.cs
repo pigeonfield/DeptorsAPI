@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using DluznicyAPI.CustomExceptions;
 using DluznicyAPI.DAL.Converters;
 using DluznicyAPI.DAL.DAO;
 using DluznicyAPI.DAL.Repositories;
@@ -33,7 +34,7 @@ namespace DluznicyAPI.Controllers
             var person = await _personRepository.GetPerson(personId);
             if (person == null)
             {
-                return NotFound();
+                throw new PersonNotFoundException();
             }
             else
             {
@@ -59,6 +60,7 @@ namespace DluznicyAPI.Controllers
 
                 return Ok(personConverted.ConvertPersonToShowSingle());
             }
+
             else
             {
                 return BadRequest();
