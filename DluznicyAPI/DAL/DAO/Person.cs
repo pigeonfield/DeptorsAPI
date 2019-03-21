@@ -14,6 +14,8 @@ namespace DluznicyAPI.DAL.DAO
     {
         public string Name { get; set; }
         public string Surname { get; set; }
+        public DateTime BornAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public int PersonalDetailsId { get; set; }
         public PersonalDetails Details { get; set; }

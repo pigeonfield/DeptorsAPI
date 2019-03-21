@@ -16,6 +16,8 @@ namespace DluznicyAPI.DAL.Converters
                 UserName = person.Email,
                 Name = person.Name,
                 Surname = person.Surname,
+                BornAt = person.BornAt,
+                CreatedAt = DateTime.Now,
                 Email = person.Email,
                 PhoneNumber = person.PhoneNumber,
                 Details = person.Details,
@@ -33,11 +35,15 @@ namespace DluznicyAPI.DAL.Converters
 
         public static PersonShowSingle ConvertPersonToShowSingle(this Person person)
         {
+
+            double activeSince = (DateTime.Now - person.CreatedAt).TotalDays;
+
             return new PersonShowSingle
             {
                 UserName = person.UserName,
                 Name = person.Name,
                 Surname = person.Surname,
+                ActiveSince = activeSince,
                 Email = person.Email,
                 PhoneNumber = person.PhoneNumber,
                 AddressIsGiven = (!(person.Address == null)),

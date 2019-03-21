@@ -15,6 +15,8 @@ namespace DluznicyAPI.DTO.ViewModels
         [MaxLength(20)]
         public string Surname { get; set; }
         [Required]
+        public DateTime BornAt { get; set; }
+        [Required]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
         [Required]
